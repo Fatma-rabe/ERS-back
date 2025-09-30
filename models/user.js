@@ -21,12 +21,14 @@ const userSchema = new mongoose.Schema({
 });
 
 // hash password before save
-userSchema.pre("save",async function(next){
-    const salt = bcrypt.genSaltSync(10);
-    var hashpassword = await bcrypt.hash(this.password,salt);
-    this.password = hashpassword;
+userSchema.pre("save", async function (next) {
+    if (!this.isModified("password")) return next(); // لو الباسورد ما اتغيرش، كمل عادي
+  
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
     next();
 });
+  
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;
