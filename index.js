@@ -7,13 +7,6 @@ const initChatSocket = require("./socket/chatSocket");
 require("dotenv").config();
 
 const app = express();
-
-app.use(cors({
-  origin: "http://localhost:54501", 
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-}));
-
 app.use(express.json());
 
 // APIs
@@ -21,7 +14,7 @@ app.use("/login", require("./routes/login"));
 app.use("/register", require("./routes/registrat"));
 app.use("/chat", require("./routes/chat"));
 
-// MongoDB 
+// MongoDB
 const mongourl = process.env.MONGO_URL;
 mongoose
   .connect(mongourl)
