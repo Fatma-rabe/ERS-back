@@ -2,10 +2,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const http = require("http");
 const { Server } = require("socket.io");
+const cors = require("cors");
 const initChatSocket = require("./socket/chatSocket");
 require("dotenv").config();
 
 const app = express();
+app.use(cors({
+  origin: "*", // أو حط هنا دومين Flutter
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
 app.use(express.json());
 
 // APIs
