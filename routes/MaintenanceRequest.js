@@ -1,0 +1,10 @@
+const express = require("express");
+const router = express.Router();
+const { verifyTokenMiddleware, isAdmin } = require("../middleware/auth");
+const { createMaintenanceRequest, getMaintenanceRequests, getMaintenanceRequest, acceptMaintenanceRequest, rejectMaintenanceRequest } = require("../controller/MaintenanceRequest");
+router.post("/SendRequest", verifyTokenMiddleware, createMaintenanceRequest);
+router.get("/GetRequests", verifyTokenMiddleware, isAdmin, getMaintenanceRequests);
+router.get("/myRequest", verifyTokenMiddleware, getMaintenanceRequest);
+router.put("/AcceptRequest/:id", verifyTokenMiddleware, isAdmin, acceptMaintenanceRequest);
+router.put("/RejectRequest/:id", verifyTokenMiddleware, isAdmin, rejectMaintenanceRequest);
+module.exports = router;

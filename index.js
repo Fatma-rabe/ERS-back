@@ -19,8 +19,13 @@ app.use(express.json());
 // APIs
 app.use("/login", require("./routes/login"));
 app.use("/register", require("./routes/registrat"));
+app.use("/Update", require("./routes/Update"));
 app.use("/chat", require("./routes/chat"));
-
+app.use("/Transaction", require("./routes/Transaction"));
+app.use("/WorkerManagement", require("./routes/Theworker-management"));
+app.use("/MaintenanceRequest", require("./routes/MaintenanceRequest"));
+app.use("/EquipmentList",require("./routes/Equipment-List"));
+app.use("/WarehouseManagement", require("./routes/WarehouseManagement"));
 // MongoDB 
 const mongourl = process.env.MONGO_URL;
 mongoose
